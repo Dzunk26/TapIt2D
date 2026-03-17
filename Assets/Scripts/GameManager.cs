@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour {
         }
 
         PlayerPrefs.SetInt(PLAYER_PREFS_WIN_STRIKE, winStrike);
+        PlayerPrefs.Save();
     }
 
     public float GetWinStrikeNormalized() {
@@ -81,6 +82,7 @@ public class GameManager : MonoBehaviour {
         totalCointAmount += coinReceive;
 
         PlayerPrefs.SetInt(PLAYER_PREFS_TOTAL_COIN_AMOUNT, totalCointAmount);
+        PlayerPrefs.Save();
 
         OnIncreaseTotalCoinAmount?.Invoke(this, EventArgs.Empty);
     }

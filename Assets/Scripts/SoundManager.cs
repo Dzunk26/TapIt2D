@@ -3,9 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour {
+    private const string PLAYER_PREFS_SOUND_EFFECTS_VOLUME = "SoundEffectVolume";
+    public static SoundManager Instance;
     private float volume = 0.5f;
+    private float defaultVolume = 0.5f;
 
     [SerializeField] private AudioClipRefsSO audioClipRefsSO;
+
+    private void Awake() {
+        Instance = this;
+
+        volume = PlayerPrefs.GetFloat(PLAYER_PREFS_SOUND_EFFECTS_VOLUME, 0.5f);
+    }
 
     private void Start() {
         Block.OnAnyBlockTapedSound += Block_OnAnyBlockTaped;
@@ -40,5 +49,15 @@ public class SoundManager : MonoBehaviour {
 
     private void PlaySound(AudioClip audioClip, Vector3 position) {
         AudioSource.PlayClipAtPoint(audioClip, position, volume);
+    }
+
+    public void SetVolume(float volume) {
+        this.volume = volume;
+        PlayerPrefs.SetFloat(PLAYER_PREFS_SOUND_EFFECTS_VOLUME, volume);
+        PlayerPrefs.Save();
+    }
+
+    public float GetDefaultVolume() {
+        return defaultVolume;
     }
 }

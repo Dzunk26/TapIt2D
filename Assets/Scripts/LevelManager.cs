@@ -71,6 +71,7 @@ public class LevelManager : MonoBehaviour {
         this.currentLevel = currentLevel;
 
         PlayerPrefs.SetInt(PLAYER_PREFS_CURRENT_LEVEL, currentLevel);
+        PlayerPrefs.Save();
     }
 
     public int GetCurrentLevel() {
